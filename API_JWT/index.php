@@ -1,3 +1,10 @@
-﻿<?php
+<?php
 
-echo 'Hello World!';
+require_once("database/Database.php");
+
+
+$db = new Database();
+
+$db->getConection();
+
+
