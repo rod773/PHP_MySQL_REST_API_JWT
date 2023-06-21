@@ -11,10 +11,10 @@
 class Employee
 {
     private $empTable = "tbl_employees";
-    private $id;
-    private $name;
-    private $email;
-    private $designation;
+    public $id;
+    public $name;
+    public $email;
+    public $designation;
     private $connection;
 
 
@@ -25,23 +25,25 @@ class Employee
 
     //insert
     public function addEmployee(){
-        $sql = "insert into $this->empTable (name, email, designation) "
-            + "values (?,?,?)";
+
+        $this->name = htmlspecialchars(strip_tags($this->name));
+        $this->email = htmlspecialchars(strip_tags($this->email));
+        $this->designation = htmlspecialchars(strip_tags($this->designation));
+
+        $sql = "insert into ".$this->empTable." (name, email, designation) ".
+            " values ( ? , ? , ? ) ";
 
         if($stmt = $this->connection->prepare($sql)){
 
-            $this->name = htmlspecialchars(strip_tags($this->name));
-
-            $this->name = htmlspecialchars(strip_tags($this->email));
-
-            $this->name = htmlspecialchars(strip_tags($this->designation));
-
             $stmt->bind_param("sss",$this->name,$this->email,$this->designation);
 
-            if($stmt->execute){
+            if($stmt->execute()){
+                echo "success";die;
                return true;
             }
             else{
+               echo "failed";die;
+              
                return false;
             }
         }
@@ -80,10 +82,9 @@ class Employee
     public function updateEmployee(){
 
         $this->name = htmlspecialchars(strip_tags($this->name));
-
-        $this->name = htmlspecialchars(strip_tags($this->email));
-
-        $this->name = htmlspecialchars(strip_tags($this->designation));
+        $this->email = htmlspecialchars(strip_tags($this->email));
+        $this->designation = htmlspecialchars(strip_tags($this->designation));
+        $this->id = htmlspecialchars(strip_tags($this->id));
 
         $sql = "update $this->empTable "+
             "set name = ? , email = ? , designation = ? "+
@@ -103,6 +104,9 @@ class Employee
 
     //delete
     public function deleteEmployee(){
+
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
         $sql = "delete from $this->empTable "+
             "where id = ?";
 

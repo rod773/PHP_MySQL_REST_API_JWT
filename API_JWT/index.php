@@ -1,17 +1,31 @@
 <?php
 
-require_once("database/Database.php");
+include_once("./database/Database.php");
+include_once("./class/Employee.php");
 
 
 $db = new Database();
 
 
-$objectValue = $db->getConection();
+
+$mysqli = $db->getConection();
+
+$emp = new Employee($mysqli);
 
 
-echo "<pre>";
+$emp->name = "rod";
 
-print_r ($objectValue);
+$emp->email = "rod@gmail.com";
+
+$emp->designation = "developer";
+
+$emp ->addEmployee();
+
+
+
+
+
+
 
 
 
