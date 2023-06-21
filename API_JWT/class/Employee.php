@@ -91,7 +91,7 @@ class Employee
 
         $stmt = $this->connection->prepare($sql);
 
-        $stmt->bind_param("sssi",$this->name,$this->email,$this->designation);
+        $stmt->bind_param("sssi",$this->name,$this->email,$this->designation,$this->id);
 
         if($stmt->execute()){
             return true;
@@ -103,7 +103,19 @@ class Employee
 
     //delete
     public function deleteEmployee(){
+        $sql = "delete from $this->empTable "+
+            "where id = ?";
 
+        $stmt = $this->connection->prepare($sql);
+
+        $stmt->bind_param("i",$this->id);
+
+        if($stmt->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 
