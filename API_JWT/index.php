@@ -21,6 +21,10 @@ $designation = "developer"  ;
 
 $emp->addEmployee($name,$email,$designation);
 
+$list = $emp->listEmployee();
+
+print_r($list);
+
 
 
 
