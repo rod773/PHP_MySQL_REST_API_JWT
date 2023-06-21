@@ -13,15 +13,13 @@ $mysqli = $db->getConection();
 $emp = new Employee($mysqli);
 
 
-$emp->name = "rod";
+$name = "rod"  ;
 
-$emp->email = "rod@gmail.com";
+$email = "rod@gmail.com" ;
 
-$emp->designation = "developer";
+$designation = "developer"  ;
 
-$emp ->addEmployee();
-
-
+$emp->addEmployee($name,$email,$designation);
 
 
 

@@ -11,10 +11,7 @@
 class Employee
 {
     private $empTable = "tbl_employees";
-    public $id;
-    public $name;
-    public $email;
-    public $designation;
+ 
     private $connection;
 
 
@@ -23,36 +20,43 @@ class Employee
         $this->connection = $db;
     }
 
-    //insert
-    public function addEmployee(){
+    
 
-        $this->name = htmlspecialchars(strip_tags($this->name));
-        $this->email = htmlspecialchars(strip_tags($this->email));
-        $this->designation = htmlspecialchars(strip_tags($this->designation));
+   
+
+    //insert
+    public function addEmployee($name,$email,$designation){
+
+        $name = htmlspecialchars(strip_tags($name));
+        $email = htmlspecialchars(strip_tags($email));
+        $designation = htmlspecialchars(strip_tags($designation));
 
         $sql = "insert into ".$this->empTable." (name, email, designation) ".
             " values ( ? , ? , ? ) ";
 
         if($stmt = $this->connection->prepare($sql)){
 
-            $stmt->bind_param("sss",$this->name,$this->email,$this->designation);
+            $stmt->bind_param("sss",$name,$email,$designation);
 
             if($stmt->execute()){
-                echo "success";die;
+
+               echo "success";
                return true;
+
             }
             else{
-               echo "failed";die;
-              
+
+               echo "failed";
                return false;
+
             }
         }
     }
 
     //read
-    public function listEmployee(){
+    public function listEmployee($id=null){
 
-        if($this->id){
+        if($id){
 
             $sql = "select from $this->empTable where id= ? ";
 
@@ -79,12 +83,12 @@ class Employee
     }
 
     //update
-    public function updateEmployee(){
+    public function updateEmployee($name,$email,$designation,$id){
 
-        $this->name = htmlspecialchars(strip_tags($this->name));
-        $this->email = htmlspecialchars(strip_tags($this->email));
-        $this->designation = htmlspecialchars(strip_tags($this->designation));
-        $this->id = htmlspecialchars(strip_tags($this->id));
+        $name = htmlspecialchars(strip_tags($name));
+        $email = htmlspecialchars(strip_tags($email));
+        $designation = htmlspecialchars(strip_tags($designation));
+        $id = htmlspecialchars(strip_tags($id));
 
         $sql = "update $this->empTable "+
             "set name = ? , email = ? , designation = ? "+
@@ -92,7 +96,7 @@ class Employee
 
         $stmt = $this->connection->prepare($sql);
 
-        $stmt->bind_param("sssi",$this->name,$this->email,$this->designation,$this->id);
+        $stmt->bind_param("sssi",$name,$email,$designation,$id);
 
         if($stmt->execute()){
             return true;
@@ -103,16 +107,16 @@ class Employee
     }
 
     //delete
-    public function deleteEmployee(){
+    public function deleteEmployee($id){
 
-        $this->id = htmlspecialchars(strip_tags($this->id));
+        $id = htmlspecialchars(strip_tags($this->id));
 
         $sql = "delete from $this->empTable "+
             "where id = ?";
 
         $stmt = $this->connection->prepare($sql);
 
-        $stmt->bind_param("i",$this->id);
+        $stmt->bind_param("i",$id);
 
         if($stmt->execute()){
             return true;
