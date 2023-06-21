@@ -19,7 +19,7 @@ class Employee
 
 
     //database init
-    public function __construct($db){
+    public function __constructor($db){
         $this->connection = $db;
     }
 
@@ -39,16 +39,39 @@ class Employee
             $stmt->bind_param("sss",$this->name,$this->email,$this->designation);
 
             if($stmt->execute){
-                return true;
+               return true;
             }
             else{
-                return false;
+               return false;
             }
         }
     }
 
     //read
     public function listEmployee(){
+
+        if($this->id){
+            $sql = "select from $empTable where id= ? ";
+
+            $stmt= $this.connection->prepare($sql);
+
+            $stmt->bind_param("i",$this->id);
+
+
+            }
+        }
+        else{
+            $sql = "select * from $empTable";
+
+            $stmt = $this.connection->prepare($sql);
+
+        }
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        return $result;
 
     }
 
@@ -61,10 +84,13 @@ class Employee
     public function deleteEmployee(){
 
     }
+
+
+
 }
 
 
-function json($status,$message,$data=array()){
+public function json($status,$message,$data=array()){
 
     $data = array(
         "status" => $status,
@@ -81,3 +107,5 @@ function json($status,$message,$data=array()){
      die;
 
 }
+
+
