@@ -15,30 +15,25 @@ class Database
     private $password = "";
     private $dbname = "php_rest_api_noauth";
 
-    private $mysqli;
 
 
     public function getConection() {
 
-        try{
-            $this->mysqli = new mysqli(
-            $this->hostname,
-            $this->user,
-            $this->password,
-            $this->dbname
-            );
+        
+        $mysqli = new mysqli(
+        $this->hostname,
+        $this->user,
+        $this->password,
+        $this->dbname
+        );
 
-            echo "<pre>";
-            print_r($this->mysqli);
-
+        if($mysqli->connect_errno > 0){
+            die("Error : ".$mysqli->connect_error);
         }
-        catch(Exception $e){
-            echo "<pre>";
-            echo $e->getMessage();
+            
+        else {
+            return $mysqli;
         }
-
-
-        return $this->mysqli;
 
 
     }
