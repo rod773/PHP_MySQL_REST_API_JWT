@@ -51,19 +51,19 @@ class Employee
     public function listEmployee(){
 
         if($this->id){
-            $sql = "select from $empTable where id= ? ";
+            $sql = "select from $this->empTable where id= ? ";
 
-            $stmt= $this.connection->prepare($sql);
+            $stmt= $this->connection->prepare($sql);
 
             $stmt->bind_param("i",$this->id);
 
 
             }
-        }
+        
         else{
-            $sql = "select * from $empTable";
+            $sql = "select * from $this->empTable";
 
-            $stmt = $this.connection->prepare($sql);
+            $stmt = $this->connection->prepare($sql);
 
         }
 
@@ -90,7 +90,7 @@ class Employee
 }
 
 
-public function json($status,$message,$data=array()){
+function json($status,$message,$data=array()){
 
     $data = array(
         "status" => $status,
@@ -107,5 +107,3 @@ public function json($status,$message,$data=array()){
      die;
 
 }
-
-
