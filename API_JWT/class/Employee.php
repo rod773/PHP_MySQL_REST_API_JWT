@@ -19,7 +19,7 @@ class Employee
 
 
     //database init
-    public function __constructor($db){
+    public function __construct($db){
         $this->connection = $db;
     }
 
@@ -51,6 +51,7 @@ class Employee
     public function listEmployee(){
 
         if($this->id){
+
             $sql = "select from $this->empTable where id= ? ";
 
             $stmt= $this->connection->prepare($sql);
@@ -59,13 +60,13 @@ class Employee
 
 
             }
-        
+
         else{
             $sql = "select * from $this->empTable";
 
             $stmt = $this->connection->prepare($sql);
 
-        }
+           }
 
         $stmt->execute();
 
@@ -78,6 +79,26 @@ class Employee
     //update
     public function updateEmployee(){
 
+        $this->name = htmlspecialchars(strip_tags($this->name));
+
+        $this->name = htmlspecialchars(strip_tags($this->email));
+
+        $this->name = htmlspecialchars(strip_tags($this->designation));
+
+        $sql = "update $this->empTable "+
+            "set name = ? , email = ? , designation = ? "+
+            "where id = ?";
+
+        $stmt = $this->connection->prepare($sql);
+
+        $stmt->bind_param("sssi",$this->name,$this->email,$this->designation);
+
+        if($stmt->execute()){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     //delete
