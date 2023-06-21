@@ -43,3 +43,22 @@ class Employee
 
     }
 }
+
+
+function json($status,$message,$data=array()){
+
+    $data = array(
+        "status"=>$status,
+        "maeage"=>$message,
+        "data"=>$data,
+     )
+
+     $json_encoded_data = json_encode($data);
+
+
+     print_r($json_encoded_data);
+
+
+     die;
+
+}
