@@ -31,7 +31,7 @@
                json(1,"employee added suscessfully");
            }
          else{
-             json(10,"failed to create an employee");
+             json(0,"failed to create an employee");
            }
         }
     }
