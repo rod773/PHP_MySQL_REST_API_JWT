@@ -19,25 +19,6 @@ $email = "pepe@gmail.com" ;
 
 $designation = "developer"  ;
 
-$result = $emp->listEmployee();
+$result = $emp->listEmployee(7);
 echo "<pre>";
 print_r($result->fetch_all());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

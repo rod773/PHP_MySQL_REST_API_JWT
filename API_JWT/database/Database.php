@@ -19,7 +19,7 @@ class Database
 
     public function getConection() {
 
-        
+
         $mysqli = new mysqli(
         $this->hostname,
         $this->user,
@@ -30,8 +30,9 @@ class Database
         if($mysqli->connect_errno > 0){
             die("Error : ".$mysqli->connect_error);
         }
-            
+
         else {
+            
             return $mysqli;
         }
 

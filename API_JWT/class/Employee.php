@@ -57,8 +57,6 @@ class Employee
 
         if($id){
 
-            $id = htmlspecialchars(strip_tags($id));
-
             $sql = "select * from $this->empTable where id= ? ";
 
             $stmt= $this->connection->prepare($sql);
