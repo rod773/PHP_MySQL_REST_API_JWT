@@ -1,8 +1,9 @@
 <?php
 
-     ini_set("display_errors",1);
+    //ini_set("display_errors",1);
 
-    include_once "../database/Database.php";
+    if($_SERVER['REQUEST_METHOD']=='POST'){
+        include_once "../database/Database.php";
 
     include_once "../class/Employee.php";
 
@@ -28,9 +29,11 @@
 
         if($emp){
            if($emp->addEmployee($name,$email,$designation)){
+               http_response_code(200);
                json(1,"employee added suscessfully");
            }
          else{
+             http_response_code(500);
              json(0,"failed to create an employee");
            }
         }
@@ -39,6 +42,13 @@
         http_response_code(404);
         json(0,"input values required");
     }
+
+    }
+    else{
+        http_response_code(500);
+        json(0,"Invalid Request Method");
+    }
+
 
 
 ?>
