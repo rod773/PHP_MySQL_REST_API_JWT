@@ -1,11 +1,11 @@
 <?php
+    include_once "../database/Database.php";
 
+    include_once "../class/Employee.php";
     //ini_set("display_errors",1);
 
     if($_SERVER['REQUEST_METHOD']=='POST'){
-        include_once "../database/Database.php";
 
-    include_once "../class/Employee.php";
 
 
     $db = new Database();
