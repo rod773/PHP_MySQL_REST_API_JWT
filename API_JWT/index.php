@@ -19,7 +19,9 @@ $email = "pepe@gmail.com" ;
 
 $designation = "developer"  ;
 
-$emp->updateEmployee($name,$email,$designation,1);
+$result = $emp->listEmployee();
+echo "<pre>";
+print_r($result->fetch_all());
 
 
 

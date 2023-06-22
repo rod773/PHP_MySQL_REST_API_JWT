@@ -40,12 +40,12 @@ class Employee
 
             try{
                 $stmt->execute();
-                echo "success<pre>";
+                
                 return true;
             }
             catch(Exception $e) {
                 echo $e->getMessage();
-                echo "failed<pre>";
+                
                 return false;
 
             }
@@ -57,11 +57,11 @@ class Employee
 
         if($id){
 
-            $sql = "select from $this->empTable where id= ? ";
+            $sql = "select * from $this->empTable where id= ? ";
 
             $stmt= $this->connection->prepare($sql);
 
-            $stmt->bind_param("i",$this->id);
+            $stmt->bind_param("i",$id);
 
 
             }
@@ -77,7 +77,7 @@ class Employee
             $stmt->execute();
 
             $result = $stmt->get_result();
-
+            
             return $result;
         }
         catch(Exception $e) {
@@ -106,7 +106,7 @@ class Employee
 
         try{
             $stmt->execute();
-            echo "employee updated<pre>";
+            
             return true;
 
         }
@@ -130,7 +130,7 @@ class Employee
 
         try{
             $stmt->execute();
-            echo "employee deleted<pre>";
+            
             return true;
 
         }
