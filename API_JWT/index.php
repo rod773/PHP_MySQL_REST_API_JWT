@@ -19,6 +19,6 @@ $email = "pepe@gmail.com" ;
 
 $designation = "developer"  ;
 
-$result = $emp->listEmployee(7);
+$result = $emp->listEmployee(1);
 echo "<pre>";
 print_r($result->fetch_all());

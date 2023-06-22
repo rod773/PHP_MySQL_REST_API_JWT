@@ -5,7 +5,7 @@
 
     //ini_set("display_errors",1);
 
-    if($_SERVER['REQUEST_METHOD']=='POST'){
+    if($_SERVER['REQUEST_METHOD']=='PUT'){
 
 
     $db = new Database();
