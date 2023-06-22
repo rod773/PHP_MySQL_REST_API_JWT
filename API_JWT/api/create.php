@@ -1,4 +1,5 @@
 <?php
+
     include_once "../database/Database.php";
 
     include_once "../class/Employee.php";
@@ -30,7 +31,7 @@
         if($emp){
            if($emp->addEmployee($name,$email,$designation)){
                http_response_code(200);
-               json(1,"employee added suscessfully");
+               json(1,"employee added suscessfully",$formdata);
            }
          else{
              http_response_code(500);
