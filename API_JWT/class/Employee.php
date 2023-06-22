@@ -11,7 +11,7 @@
 class Employee
 {
     private $empTable = "tbl_employees";
- 
+
     private $connection;
 
 
@@ -20,9 +20,9 @@ class Employee
         $this->connection = $db;
     }
 
-    
 
-   
+
+
 
     //insert
     public function addEmployee($name,$email,$designation){
@@ -38,16 +38,15 @@ class Employee
 
             $stmt->bind_param("sss",$name,$email,$designation);
 
-            if($stmt->execute()){
-
-               echo "success";
-               return true;
-
+            try{
+                $stmt->execute();
+                echo "success<pre>";
+                return true;
             }
-            else{
-
-               echo "failed";
-               return false;
+            catch(Exception $e) {
+                echo $e->getMessage();
+                echo "failed<pre>";
+                return false;
 
             }
         }
@@ -74,11 +73,17 @@ class Employee
 
            }
 
-        $stmt->execute();
+        try{
+            $stmt->execute();
 
-        $result = $stmt->get_result();
+            $result = $stmt->get_result();
 
-        return $result;
+            return $result;
+        }
+        catch(Exception $e) {
+            echo $e->getMessage();
+
+        }
 
     }
 
@@ -90,18 +95,23 @@ class Employee
         $designation = htmlspecialchars(strip_tags($designation));
         $id = htmlspecialchars(strip_tags($id));
 
-        $sql = "update $this->empTable "+
-            "set name = ? , email = ? , designation = ? "+
+        $sql = "update $this->empTable ".
+            "set name = ? , email = ? , designation = ? ".
             "where id = ?";
 
         $stmt = $this->connection->prepare($sql);
 
         $stmt->bind_param("sssi",$name,$email,$designation,$id);
 
-        if($stmt->execute()){
+
+        try{
+            $stmt->execute();
+            echo "employee updated<pre>";
             return true;
+
         }
-        else {
+            catch(Exception $e) {
+            echo $e->getMessage()."<pre>";
             return false;
         }
     }
@@ -109,19 +119,23 @@ class Employee
     //delete
     public function deleteEmployee($id){
 
-        $id = htmlspecialchars(strip_tags($this->id));
+        $id = htmlspecialchars(strip_tags($id));
 
-        $sql = "delete from $this->empTable "+
+        $sql = "delete from $this->empTable ".
             "where id = ?";
 
         $stmt = $this->connection->prepare($sql);
 
         $stmt->bind_param("i",$id);
 
-        if($stmt->execute()){
+        try{
+            $stmt->execute();
+            echo "employee deleted<pre>";
             return true;
+
         }
-        else {
+        catch(Exception $e) {
+            echo $e->getMessage()."<pre>";
             return false;
         }
     }
