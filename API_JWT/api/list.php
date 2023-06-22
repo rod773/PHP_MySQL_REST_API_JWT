@@ -12,13 +12,26 @@
 
     $emp = new Employee($mysqli);
 
-    $result = $emp->listEmployee();
+    $empId = !empty($_GET['id']) ? $_GET['id'] : 0 ;
+
+    if($empId>0){
+
+        $result = $emp->listEmployee($empId);
+
+    }else {
+
+        $result = $emp->listEmployee();
+
+    }
+
+    
 
     if($result->num_rows>0){
 
         $allEmployees = $result->fetch_all(MYSQLI_ASSOC);
 
         http_response_code(200);
+
         json(1,"Enployee data",$allEmployees);
     }
     else{
