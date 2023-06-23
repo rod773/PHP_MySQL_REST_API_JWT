@@ -24,11 +24,11 @@ DROP TABLE IF EXISTS `projects`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `projects` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `user_is` varchar(200) NOT NULL,
+  `user_id` int NOT NULL,
   `title` varchar(200) NOT NULL,
   `budget` int NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_is_UNIQUE` (`user_is`),
+  UNIQUE KEY `user_is_UNIQUE` (`user_id`),
   UNIQUE KEY `title_UNIQUE` (`title`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -79,4 +79,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-22 23:43:00
+-- Dump completed on 2023-06-23  8:30:39
