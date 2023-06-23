@@ -54,6 +54,34 @@ class User
 
     public function checkUser($email){
 
+        if(!empty($email)){
+            
+            $sql = "select * from $this->userTable where email = ? ";
+
+            if($stmt=$this->connection->prepare($sql)){
+
+                
+                $stmt->bind_param("s",$email);
+
+                try{
+                    $stmt->ececute();
+                
+                    $result = $stmt->get_result();
+
+                    return $result; 
+                }catch(Exception $ex){
+                    echo $ex->getMessage();
+                }
+               
+            }
+
+
+        }else{
+            return false;
+        }
+
+
+
     }
 
 
