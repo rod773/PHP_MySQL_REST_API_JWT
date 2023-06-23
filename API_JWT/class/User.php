@@ -10,7 +10,7 @@
  */
 class User
 {
-    private $userTable = "tbl_user";
+    private $userTable = "tbl_users";
 
     private $projectTable="projects";
 
@@ -22,6 +22,31 @@ class User
     }
 
     public function registerUser($first_name,$last_name,$email,$password){
+
+        $sql = "insert into $this->userTable (first_name,last_name,email,password) ".
+            "values ( ?, ?, ? , ?  ";
+
+        if($stmt = $this->connection->prepare($sql)){
+
+             $first_name = htmlspecialchars(strip_tags($first_name));
+             $last_name = htmlspecialchars(strip_tags($last_name));
+             $email = htmlspecialchars(strip_tags($email));
+             $password = htmlspecialchars(strip_tags($password));
+
+
+             $stmt->bind_param("ssss",$first_name,$last_name,$email,$password);
+
+             try{
+                   $stmt->execute() ;
+                   return true;
+
+             }catch(Exception $e) {
+
+                   echo $e->getMessage();
+                   return false;
+
+             }
+        }
 
 
 
