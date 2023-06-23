@@ -149,7 +149,7 @@ function json($status,$message,$data=array()){
 
     $data = array(
         "status" => $status,
-        "maeage" => $message,
+        "message" => $message,
         "data" => $data,
     );
 
