@@ -69,6 +69,7 @@ class User
                     $result = $stmt->get_result();
 
                     return $result; 
+                    
                 }catch(Exception $ex){
                     echo $ex->getMessage();
                 }
